@@ -159,7 +159,7 @@ class YouTubeAICrawler:
             print(f"Error parsing video item: {e}")
             return None
     
-    def crawl_ai_news(self, days_back: int = 7) -> List[YouTubeVideo]:
+    def crawl_ai_news(self, days_back: int = 30) -> List[YouTubeVideo]:
         """Crawl YouTube for AI news videos"""
         all_videos = []
         
@@ -202,7 +202,7 @@ class YouTubeAICrawler:
             video.relevance_score = self._calculate_relevance_score(video)
         
         return video_list
-
+    
     def _calculate_relevance_score(self, video: YouTubeVideo) -> float:
         """Calculate relevance score based on various factors"""
         score = 0.0
@@ -391,26 +391,7 @@ class WeeklyPublisher:
             print(f"Error sending email: {e}")
             return False
 
-def safe_int_env(env_var, default):
-    """Safely convert environment variable to int with fallback"""
-    value = os.getenv(env_var, '').strip()
-    if not value:
-        return default
-    try:
-        return int(value)
-    except (ValueError, TypeError):
-        print(f"⚠️  Warning: Invalid {env_var} value '{value}', using default {default}")
-        return default
-
-def safe_bool_env(env_var, default):
-    """Safely convert environment variable to bool"""
-    value = os.getenv(env_var, '').strip().lower()
-    if value in ('true', '1', 'yes', 'on'):
-        return True
-    elif value in ('false', '0', 'no', 'off'):
-        return False
-    else:
-        return default
+def main():
     """Main function to run the crawler and publisher"""
     
     # Configuration - set these as environment variables or config file
@@ -465,10 +446,10 @@ def safe_bool_env(env_var, default):
         print(f"   Views: {video.view_count:,} | Score: {video.relevance_score:.1f}")
         
         # Show most replayed section if available
-        if video.most_replayed_segment:
-            segment = video.most_replayed_segment
-            print(f"   🔥 Most Replayed: {segment['peak_time_formatted']} (Engagement: {segment['intensity']*100:.0f}%)")
-            print(f"   🎯 Jump to peak: {video.timestamped_url}")
+        #if video.most_replayed_segment:
+        #    segment = video.most_replayed_segment
+        #    print(f"   🔥 Most Replayed: {segment['peak_time_formatted']} (Engagement: {segment['intensity']*100:.0f}%)")
+        #    print(f"   🎯 Jump to peak: {video.timestamped_url}")
         
         print(f"   🔗 URL: {video.url}")
         print()
