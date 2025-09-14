@@ -55,10 +55,25 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v4
-      if: success()
+    - name: Prepare for GitHub Pages
+      run: |
+        # Create pages directory
+        mkdir -p pages
+    
+        # Find the latest report file
+        LATEST_REPORT=$(ls -t ai_news_weekly_*.html | head -n1)
+        echo "📄 Latest report: $LATEST_REPORT"
+    
+        # Copy it as index.html (this becomes your main page)
+        cp "$LATEST_REPORT" pages/index.html
+    
+        echo "✅ Created index.html from $LATEST_REPORT"
+
+    - name: Upload Pages Artifact
+      uses: actions/upload-pages-artifact@v3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./
-        destination_dir: reports
+        path: ./pages
+
+    - name: Deploy to GitHub Pages
+      uses: actions/deploy-pages@v4
+      id: deployment
