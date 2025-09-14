@@ -1,0 +1,56 @@
+name: Weekly AI News Crawler
+
+on:
+  schedule:
+    # Run every Monday at 9:00 AM UTC (adjust timezone as needed)
+    - cron: '0 9 * * 1'
+  
+  # Allow manual triggering
+  workflow_dispatch:
+
+jobs:
+  crawl-and-publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Run AI News Crawler
+      env:
+        YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        EMAIL_USER: ${{ secrets.EMAIL_USER }}
+        EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+        EMAIL_RECIPIENTS: ${{ secrets.EMAIL_RECIPIENTS }}
+        SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
+        SMTP_PORT: ${{ secrets.SMTP_PORT }}
+      run: |
+        python src/youtube_crawler.py
+    
+    - name: Upload HTML Report as Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: weekly-ai-report
+        path: ai_news_weekly_*.html
+        retention-days: 30
+    
+    - name: Commit and Push Report (Optional)
+      if: success()
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add ai_news_weekly_*.html
+        git diff --staged --quiet || git commit -m "Add weekly AI news report $(date +%Y-%m-%d)"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
