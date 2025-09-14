@@ -275,7 +275,7 @@ class WeeklyPublisher:
         </head>
         <body>
             <div class="header">
-                <h1>🤖 Weekly AI News Roundup</h1>
+                <h1>Weekly AI News Roundup</h1>
                 <p>Top {len(videos)} AI videos from YouTube this week</p>
                 <p>Generated on {datetime.now().strftime('%B %d, %Y')}</p>
             </div>
@@ -292,13 +292,13 @@ class WeeklyPublisher:
                     {i}. <a href="{video.url}" target="_blank">{video.title}</a>
                 </div>
                 <div class="video-meta">
-                    📺 {video.channel_name} | 📅 {self._format_date(video.published_at)} | ⏱️ {duration}
+                    {video.channel_name} | {self._format_date(video.published_at)} |  {duration}
                 </div>
                 <div class="video-stats">
-                    👀 {video.view_count:,} views | 
-                    👍 {video.like_count:,} likes | 
-                    💬 {video.comment_count:,} comments |
-                    📊 Score: {video.relevance_score:.1f}
+                    {video.view_count:,} views | 
+                    {video.like_count:,} likes | 
+                    {video.comment_count:,} comments |
+                    Score: {video.relevance_score:.1f}
                 </div>
                 <div class="clear"></div>
             </div>
