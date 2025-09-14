@@ -38,7 +38,7 @@ jobs:
         python src/youtube_crawler.py
     
     - name: Upload HTML Report as Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: weekly-ai-report
         path: ai_news_weekly_*.html
