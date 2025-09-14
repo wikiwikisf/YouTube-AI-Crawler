@@ -449,10 +449,10 @@ def main():
         print(f"   Views: {video.view_count:,} | Score: {video.relevance_score:.1f}")
         
         # Show most replayed section if available
-        if video.most_replayed_segment:
-            segment = video.most_replayed_segment
-            print(f"   🔥 Most Replayed: {segment['peak_time_formatted']} (Engagement: {segment['intensity']*100:.0f}%)")
-            print(f"   🎯 Jump to peak: {video.timestamped_url}")
+        #if video.most_replayed_segment:
+        #    segment = video.most_replayed_segment
+        #    print(f"   🔥 Most Replayed: {segment['peak_time_formatted']} (Engagement: {segment['intensity']*100:.0f}%)")
+        #    print(f"   🎯 Jump to peak: {video.timestamped_url}")
         
         print(f"   🔗 URL: {video.url}")
         print()
