@@ -168,11 +168,8 @@ class YouTubeAICrawler:
         # Search with different AI-related queries
         search_queries = [
             "AI Career",
-            "How LLMs",
             "AI Agents",
-            "AI Engineer",
-            "ChatGPT GPT news",
-            "AI development update"
+            "AI Engineer"
         ]
         
         for query in search_queries:
