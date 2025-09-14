@@ -35,7 +35,7 @@ jobs:
         SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
         SMTP_PORT: ${{ secrets.SMTP_PORT }}
       run: |
-        python src/youtube_crawler.py
+        python src/YouTube_crawler.py
     
     - name: Upload HTML Report as Artifact
       uses: actions/upload-artifact@v4
