@@ -35,20 +35,20 @@ class YouTubeAICrawler:
         self.api_key = api_key
         self.base_url = "https://www.googleapis.com/youtube/v3"
         self.ai_keywords = [
-            "artificial intelligence", "AI news", "machine learning", "deep learning",
-            "neural networks", "OpenAI", "ChatGPT", "GPT", "LLM", "large language model",
+            "agents", "AI Career", "AI/ML", "Vibe Coding", "Vibe-coded", "Learn LLM", "Machine Learning",
+            "AI Engineer", "OpenAI", "ChatGPT", "GPT", "LLM", "LLMs", "large language model",
             "AI breakthrough", "AI development", "AI research", "generative AI",
-            "computer vision", "natural language processing", "NLP", "AI ethics",
+            "computer vision", "natural language processing", "AI ethics",
             "AI regulation", "AI startup", "AI company", "AI technology"
         ]
         
         # Popular AI channels to prioritize
         self.ai_channels = [
             "Two Minute Papers",
-            "Yannic Kilcher",
+            "Marina Wyss - AI & Machine Learning",
             "AI Explained",
             "Machine Learning Street Talk",
-            "Lex Fridman",
+            "Jean Lee",
             "The AI Advantage",
             "AI Coffee Break",
             "DeepMind",
@@ -159,7 +159,7 @@ class YouTubeAICrawler:
             print(f"Error parsing video item: {e}")
             return None
     
-    def crawl_ai_news(self, days_back: int = 7) -> List[YouTubeVideo]:
+    def crawl_ai_news(self, days_back: int = 30) -> List[YouTubeVideo]:
         """Crawl YouTube for AI news videos"""
         all_videos = []
         
@@ -167,10 +167,10 @@ class YouTubeAICrawler:
         
         # Search with different AI-related queries
         search_queries = [
-            "AI news this week",
-            "artificial intelligence latest",
-            "machine learning news",
-            "AI breakthrough 2024",
+            "AI Career",
+            "How LLMs",
+            "AI Agents",
+            "AI Engineer",
             "ChatGPT GPT news",
             "AI development update"
         ]
