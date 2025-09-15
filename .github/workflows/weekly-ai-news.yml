@@ -73,6 +73,6 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       if: success()
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.MYGITHUB_TOKEN }}
         publish_dir: ./
         destination_dir: reports
