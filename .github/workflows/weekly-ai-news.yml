@@ -44,17 +44,6 @@ jobs:
         path: ai_news_weekly_*.html
         retention-days: 30
     
-    - name: Commit and Push Report (Optional)
-      if: success()
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add ai_news_weekly_*.html
-        git diff --staged --quiet || git commit -m "Add weekly AI news report $(date +%Y-%m-%d)"
-        git push
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
     - name: Prepare for GitHub Pages
       run: |
         # Create pages directory
